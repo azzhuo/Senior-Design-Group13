@@ -4,14 +4,14 @@ clc
 clear
 clear('cam')
 %% Check Camera List
-cam_list = webcamlist
+cam_list = webcamlist;
 
 %% Assign webcam to be used
 % Pick an index from the camera list above
-cam_name = cam_list{1}
+cam_name = cam_list{1};
 
 %% Check webcam properties
-cam = webcam(cam_name)
+cam = webcam(cam_name);
 
 %% Preview cam
 preview(cam)
@@ -87,8 +87,33 @@ title('Colors');
 %% struct for identifying colors and location
 gameState.wellLoc=[30,60,90,135,180,-45,-90,-120,-150]; %All of the well locations, length = n
 gameState.wellColor=[0,0,1,0,2,0,0,4,0]; % Color of stickers in the desired configuration,
-% Length = n,colors described in "key" 
+% Length = n,colors described in "key"
 gameState.key={'0', 'Empty';'1', 'Red'; '2', 'Green'; '3', 'Yellow'; '4','Blue'}; %Key
 
 
+%% convert to hsv
 
+hsvimg = rgb2hsv(oppo);
+
+figure();
+imshow(hsvimg);
+title('test');
+
+%% find shape
+out = strings(length(info),1);
+for i=1:length(info)
+   % do we want to check for area size?
+   %if ( info(i).Area > 1000 )
+   circ = info(i).Circularity;
+  if (circ >= .9)
+      out{i,1}= 'circle';
+  elseif (circ < .9 && circ >= .7)
+      out{i,1}= 'square';
+  elseif (circ < .7 && circ >= .5)
+      out{i,1}= 'triangle';
+  else
+      out{i,1}= 'unknown';
+  end
+
+end
+    

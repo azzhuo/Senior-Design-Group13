@@ -46,8 +46,8 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     gameState.IbinaryDifference = im2bw(gameState.Idifference, 0.05);
 
     % Show the difference image (binary) for testing
-    %figure();
-    %imshow(gameState.IbinaryDifference);
+    figure();
+    imshow(gameState.IbinaryDifference);
 
     
     
@@ -58,12 +58,12 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     gameState.IdifferenceClosed = imdilate(gameState.IdifferenceOpened, se2);
     
     % Show cleaned up image for testing
-    %figure();
-    %imshow(gameState.IdifferenceOpened);
+    figure();
+    imshow(gameState.IdifferenceOpened);
 
     % Show cleaned up image for testing
-    %figure();
-    %imshow(gameState.IdifferenceClosed);
+    figure();
+    imshow(gameState.IdifferenceClosed);
 
     % Mask the RGB original image with the binary mask of sticker locations
     gameState.IMask = repmat(gameState.IdifferenceClosed, [1, 1, 3]);
@@ -71,8 +71,8 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     gameState.IMasked(~gameState.IMask) = 0;
 
     % Show the masked image for testing
-    %figure();
-    %imshow(gameState.IMasked);
+    figure();
+    imshow(gameState.IMasked);
 
 
 
@@ -107,9 +107,9 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     end
 
     % Show red areas for testing
-    %figure(); 
-    %imshow(gameState.IredBinary);
-    %title('Red Regions');
+    figure(); 
+    imshow(gameState.IredBinary);
+    title('Red Regions');
 
     
     
@@ -143,9 +143,9 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     end
 
     % Show green areas for testing
-    %figure(); 
-    %imshow(gameState.IgreenBinary);
-    %title('Green Regions');
+    figure(); 
+    imshow(gameState.IgreenBinary);
+    title('Green Regions');
 
     
     
@@ -180,9 +180,9 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     end
 
     % Show blue areas for testing
-    %figure(); 
-    %imshow(gameState.IblueBinary);
-    %title('Blue Regions');
+    figure(); 
+    imshow(gameState.IblueBinary);
+    title('Blue Regions');
 
     
     
@@ -217,15 +217,15 @@ function [gameState] = GameStateIdentification(backimg, foreimg)
     end
 
     % Show yellow areas for testing
-    %figure(); 
-    %imshow(gameState.IyellowBinary);
-    %title('Yellow Regions');
+    figure(); 
+    imshow(gameState.IyellowBinary);
+    title('Yellow Regions');
 
     % Assemble the image of just the stickers
     gameState.Istickers = gameState.Iyellow + gameState.Igreen + gameState.Iblue + gameState.Ired;
 
     % Show the sticker only image for testing
-    %figure();
+    figure();
     imshow(gameState.Istickers);
 
 end
